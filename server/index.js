@@ -13,16 +13,18 @@ const leaguesRoutes = require('./routes/leagues');
 const tournamentsRoutes = require('./routes/tournaments');
 const playersRoutes = require('./routes/players');
 const matchesRoutes = require('./routes/matches');
+const aiRoutes = require('./routes/ai');
 
 // Use routes
 app.use('/api/leagues', leaguesRoutes);
 app.use('/api/tournaments', tournamentsRoutes);
 app.use('/api/players', playersRoutes);
 app.use('/api/matches', matchesRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to FoosBuddy API' });
+  res.json({ message: 'Welcome to FoosBuddy AI API' });
 });
 
 // Start the server

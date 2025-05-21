@@ -2,10 +2,17 @@
 const express = require('express');
 const router = express.Router();
 const players = require('../data/players');
+const aiService = require('../services/aiService');
 
 // Get all players
 router.get('/', (req, res) => {
-  res.json(players);
+  // Add skill level to each player
+  const playersWithSkill = players.map(player => ({
+    ...player,
+    skillLevel: Math.round(aiService.calculateSkillLevel(player))
+  }));
+  
+  res.json(playersWithSkill);
 });
 
 // Get player by ID
@@ -16,7 +23,14 @@ router.get('/:id', (req, res) => {
     return res.status(404).json({ message: 'Player not found' });
   }
   
-  res.json(player);
+  // Add skill level and insights
+  const playerWithInsights = {
+    ...player,
+    skillLevel: Math.round(aiService.calculateSkillLevel(player)),
+    insights: aiService.generatePlayerInsights(player.id)
+  };
+  
+  res.json(playerWithInsights);
 });
 
 // Create a new player

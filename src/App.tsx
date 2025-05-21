@@ -20,6 +20,7 @@ import MatchDetails from "./pages/MatchDetails";
 import NewMatch from "./pages/NewMatch";
 import Leaderboard from "./pages/Leaderboard";
 import Profile from "./pages/Profile";
+import AIMatch from "./pages/AIMatch";
 
 const queryClient = new QueryClient();
 
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="matches/:id" element={<MatchDetails />} />
             <Route path="leaderboard" element={<Leaderboard />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="ai-match" element={<AIMatch />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
