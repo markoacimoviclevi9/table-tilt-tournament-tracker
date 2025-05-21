@@ -1,12 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/sonner";
 import { useState } from "react";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +14,7 @@ const formSchema = z.object({
   description: z.string().min(10, "Description must be at least 10 characters"),
   startDate: z.string().min(1, "Start date is required"),
   endDate: z.string().min(1, "End date is required"),
-  maxTeams: z.string().transform((val) => parseInt(val, 10)),
+  maxTeams: z.coerce.number().min(2, "At least 2 teams are required"),
   location: z.string().min(3, "Location must be at least 3 characters"),
 });
 
@@ -31,7 +29,7 @@ const NewLeague = () => {
       description: "",
       startDate: "",
       endDate: "",
-      maxTeams: "8",
+      maxTeams: 8,
       location: "",
     },
   });

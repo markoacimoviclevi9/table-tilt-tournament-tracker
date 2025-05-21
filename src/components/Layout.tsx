@@ -1,5 +1,5 @@
 
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { Home, Trophy, Users, Calendar, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -45,15 +45,16 @@ const Layout = () => {
 };
 
 const NavLink = ({ to, icon, label }: { to: string; icon: React.ReactNode; label: string }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+  
   return (
     <Link
       to={to}
-      className={({ isActive }) =>
-        cn(
-          "flex flex-col items-center py-2 px-4",
-          isActive ? "text-indigo-600" : "text-gray-500 hover:text-indigo-600"
-        )
-      }
+      className={cn(
+        "flex flex-col items-center py-2 px-4",
+        isActive ? "text-indigo-600" : "text-gray-500 hover:text-indigo-600"
+      )}
     >
       {icon}
       <span className="text-xs mt-1">{label}</span>
